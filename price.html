@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Makes the design responsive on phones -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MORI MOVES - Fitness Dance Class</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+
+    <style>
+
+        /* =========================================
+           BASIC SETTINGS
+        ========================================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #aaa1c5;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: "Montserrat", sans-serif;
+        }
+
+
+        /* =========================================
+           MAIN POSTER
+        ========================================= */
+
+        .poster {
+            width: 630px;
+            min-height: 1090px;
+
+            position: relative;
+
+            padding: 120px 55px 100px;
+
+            overflow: hidden;
+        }
+
+
+        /* =========================================
+           CREAM PAPER
+        ========================================= */
+
+        .paper {
+            position: relative;
+
+            width: 100%;
+            min-height: 850px;
+
+            background: #f5f0eb;
+
+            padding: 100px 70px;
+
+            border-radius:
+                25px 35px 30px 25px /
+                30px 25px 35px 30px;
+
+            box-shadow:
+                0 5px 0 #e7dcc3,
+                0 10px 0 rgba(0, 0, 0, 0.03);
+        }
+
+
+        /* Beige decorative edge */
+
+        .paper::before {
+            content: "";
+
+            position: absolute;
+
+            z-index: -1;
+
+            top: -7px;
+            left: -7px;
+            right: -7px;
+            bottom: -7px;
+
+            background: #eadfc5;
+
+            border-radius:
+                28px 35px 30px 30px;
+        }
+
+
+        /* =========================================
+           CONTENT
+        ========================================= */
+
+        .content {
+            text-align: center;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        /* =========================================
+           MAIN TITLE
+        ========================================= */
+
+        h1 {
+            font-family: "DM Serif Display", serif;
+
+            font-style: italic;
+
+            font-size: 48px;
+
+            line-height: 1;
+
+            color: #050505;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 5px;
+        }
+
+
+        /* =========================================
+           SUBTITLE
+        ========================================= */
+
+        h2 {
+            font-family: "DM Serif Display", serif;
+
+            font-style: italic;
+
+            font-size: 32px;
+
+            color: #050505;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* =========================================
+           PRICE LIST BUTTON
+        ========================================= */
+
+        .price-title {
+            display: inline-block;
+
+            background: #aaa1c5;
+
+            color: white;
+
+            font-size: 23px;
+
+            font-weight: 700;
+
+            font-style: italic;
+
+            padding: 10px 30px;
+
+            border-radius: 50%;
+
+            transform: rotate(-2deg);
+
+            margin-bottom: 60px;
+        }
+
+
+        /* =========================================
+           DOTTED LINE
+        ========================================= */
+
+        .divider {
+            width: 100%;
+
+            border-top: 2px dotted #222;
+
+            margin-bottom: 62px;
+        }
+
+
+        /* =========================================
+           PRICE SECTION
+        ========================================= */
+
+        .prices {
+            text-align: left;
+        }
+
+
+        /* Each price */
+
+        .price-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            font-size: 17px;
+
+            font-style: italic;
+
+            margin-bottom: 14px;
+        }
+
+
+        /* Price numbers */
+
+        .price-row strong {
+            font-style: normal;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+
+        /* =========================================
+           CLASS PACKAGE
+        ========================================= */
+
+        h3 {
+            font-size: 17px;
+
+            font-weight: 700;
+
+            font-style: italic;
+
+            margin: 10px 0 16px;
+        }
+
+
+        /* =========================================
+           SECOND DOTTED LINE
+        ========================================= */
+
+        .second-divider {
+            margin-top: 75px;
+
+            margin-bottom: 55px;
+        }
+
+
+        /* =========================================
+           SLOGAN
+        ========================================= */
+
+        .slogan {
+            font-size: 16px;
+
+            line-height: 2.1;
+
+            letter-spacing: 7px;
+
+            text-align: center;
+
+            color: #111;
+        }
+
+
+        /* =========================================
+           PAPER CLIP
+        ========================================= */
+
+        .paperclip {
+            position: absolute;
+
+            top: 112px;
+
+            left: 125px;
+
+            width: 28px;
+
+            height: 82px;
+
+            border: 4px solid #080808;
+
+            border-radius: 20px;
+
+            transform: rotate(-15deg);
+
+            z-index: 10;
+        }
+
+
+        /* Inner part of paper clip */
+
+        .paperclip::before {
+            content: "";
+
+            position: absolute;
+
+            width: 12px;
+
+            height: 60px;
+
+            left: 4px;
+
+            top: 7px;
+
+            border: 3px solid #080808;
+
+            border-radius: 12px;
+
+            border-bottom-color: transparent;
+        }
+
+
+        /* Top curved part */
+
+        .paperclip::after {
+            content: "";
+
+            position: absolute;
+
+            width: 20px;
+
+            height: 12px;
+
+            left: -12px;
+
+            top: -5px;
+
+            border-top: 4px solid #080808;
+
+            border-left: 4px solid #080808;
+
+            border-radius: 15px 0 0 0;
+
+            transform: rotate(-10deg);
+        }
+
+
+        /* =========================================
+           MOBILE PHONE
+        ========================================= */
+
+        @media (max-width: 700px) {
+
+            body {
+                align-items: flex-start;
+            }
+
+
+            .poster {
+                width: 100%;
+
+                min-height: 100vh;
+
+                padding: 80px 25px 70px;
+            }
+
+
+            .paper {
+                padding: 80px 40px;
+
+                min-height: 850px;
+            }
+
+
+            h1 {
+                font-size: 38px;
+            }
+
+
+            h2 {
+                font-size: 25px;
+            }
+
+
+            .price-title {
+                font-size: 19px;
+
+                margin-bottom: 45px;
+            }
+
+
+            .price-row {
+                font-size: 14px;
+            }
+
+
+            h3 {
+                font-size: 15px;
+            }
+
+
+            .slogan {
+                font-size: 12px;
+
+                letter-spacing: 4px;
+            }
+
+
+            .paperclip {
+                top: 75px;
+
+                left: 70px;
+
+                transform:
+                    scale(0.8)
+                    rotate(-15deg);
+            }
+        }
+
+
+        /* =========================================
+           SMALL PHONE
+        ========================================= */
+
+        @media (max-width: 430px) {
+
+            .poster {
+                padding: 60px 15px;
+            }
+
+
+            .paper {
+                padding: 70px 25px;
+            }
+
+
+            h1 {
+                font-size: 31px;
+            }
+
+
+            h2 {
+                font-size: 21px;
+            }
+
+
+            .price-title {
+                font-size: 17px;
+
+                padding: 9px 25px;
+            }
+
+
+            .price-row {
+                font-size: 12px;
+            }
+
+
+            h3 {
+                font-size: 13px;
+            }
+
+
+            .slogan {
+                font-size: 10px;
+
+                letter-spacing: 3px;
+            }
+
+
+            .paperclip {
+                left: 45px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         POSTER START
+    ========================================== -->
+
+    <div class="poster">
+
+
+        <!-- Paper clip -->
+        <div class="paperclip"></div>
+
+
+        <!-- Cream paper -->
+        <div class="paper">
+
+
+            <div class="content">
+
+
+                <!-- =================================
+                     TITLE
+                ================================== -->
+
+                <h1>
+                    MORI MOVES
+                </h1>
+
+
+                <h2>
+                    Fitness Dance Class
+                </h2>
+
+
+                <!-- =================================
+                     PRICE LIST BUTTON
+                ================================== -->
+
+                <div class="price-title">
+                    Price List
+                </div>
+
+
+                <!-- =================================
+                     FIRST LINE
+                ================================== -->
+
+                <div class="divider"></div>
+
+
+                <!-- =================================
+                     PRICES
+                ================================== -->
+
+                <div class="prices">
+
+
+                    <!-- Single Class -->
+
+                    <div class="price-row">
+
+                        <span>
+                            Single Class
+                        </span>
+
+                        <strong>
+                            300 NTD
+                        </strong>
+
+                    </div>
+
+
+                    <!-- Package title -->
+
+                    <h3>
+                        Class Package
+                    </h3>
+
+
+                    <!-- 4 class -->
+
+                    <div class="price-row">
+
+                        <span>
+                            4-class package
+                        </span>
+
+                        <strong>
+                            1000 NTD
+                        </strong>
+
+                    </div>
+
+
+                    <!-- 8 class -->
+
+                    <div class="price-row">
+
+                        <span>
+                            8-class package + 1 class free
+                        </span>
+
+                        <strong>
+                            2000 NTD
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================
+                     SECOND LINE
+                ================================== -->
+
+                <div class="divider second-divider"></div>
+
+
+                <!-- =================================
+                     SLOGAN
+                ================================== -->
+
+                <p class="slogan">
+
+                    SPEND MONEY ON YOUR<br>
+
+                    HEALTH—IT’S WORTH IT.
+
+                </p>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+</html>

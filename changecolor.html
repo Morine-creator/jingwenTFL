@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="ranColor()">Change Color</button>
+    <p onclick="copyText()">Click to Copy <span id="text"></span></p>
+    <script>
+        let randomz = [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f'];
+        function ranColor(){
+            let hex = "#"
+            for (let i = 0; i < 6; i++) {
+                hex = hex + randomz[Math.floor(Math.random()*randomz.length)]
+                
+            }
+            let text = document.getElementById("text");
+            text.textContent = hex;
+            document.body.style.backgroundColor=hex;
+        }
+        function copyText(){
+            let copyz = document.getElementById("text").innerText;
+            navigator.clipboard.writeText(copyz);
+            alert("Copied!" + copyz);
+        }
+    </script>
+</body>
+</html>
