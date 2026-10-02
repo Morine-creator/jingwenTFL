@@ -1,58 +1,463 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>景文 TFL - 115/1 學習主題</title>
+
 <style>
-    *{
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, "Microsoft JhengHei", sans-serif;
+    background-color: #c7f7e9;
+    min-height: 100vh;
+    padding: 0 15px 25px;
+    color: #000;
+}
+
+/* Main container */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    position: relative;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    padding-top: 0;
+    margin-bottom: 17px;
+}
+
+.header h1 {
+    font-size: 29px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.header h2 {
+    font-size: 19px;
+    font-weight: bold;
+}
+
+/* Decorative heart */
+.heart {
+    position: absolute;
+    top: 10px;
+    left: -150px;
+    width: 145px;
+    height: 145px;
+    transform: rotate(-12deg);
+}
+
+/* Decorative angel */
+.angel {
+    position: absolute;
+    top: 5px;
+    right: -145px;
+    width: 150px;
+    height: 200px;
+    transform: rotate(8deg);
+}
+
+/* Table */
+.table-wrapper {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background-color: #ffd8d8;
+    border: 1px solid #333;
+}
+
+/* Column widths */
+th:nth-child(1),
+td:nth-child(1) {
+    width: 80px;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+    width: 34%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+    width: auto;
+}
+
+/* Table header */
+thead th {
+    background-color: #dda4eb;
+    border: 1px solid #333;
+    padding: 8px 5px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+/* Table content */
+tbody td {
+    border: 1px solid #555;
+    padding: 7px 6px;
+    font-size: 11px;
+    line-height: 1.35;
+    vertical-align: middle;
+}
+
+/* Date column */
+.date {
+    white-space: nowrap;
+}
+
+.date span {
+    display: inline-block;
+    background-color: #edc1c1;
+    border-radius: 15px;
+    padding: 3px 7px;
+}
+
+/* Topic column */
+.topic {
+    font-weight: bold;
+}
+
+/* Watermark */
+.watermark {
+    position: absolute;
+    top: 140px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-15deg);
+    font-size: 150px;
+    font-weight: bold;
+    color: rgba(220, 120, 120, 0.10);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body {
+        padding: 0 8px 20px;
     }
-    body{
-        padding: 30px;
-        text-align: center;
-        background: rgb(rgb(150, 100, 100), rgb(109, 183, 109), rgb(46, 46, 140));
+
+    .header h1 {
+        font-size: 23px;
     }
-    #quizContainer{
-        transition: opacity 0.3s;
-        margin: 40px;
+
+    .header h2 {
+        font-size: 16px;
     }
-    section{
-        background: rgb(117, 145, 89);
-        padding: 2vmin;
-        max-width: 400px;
-        margin: 50px;
+
+    .heart {
+        width: 65px;
+        height: 65px;
+        left: 0;
+        top: 5px;
     }
-    button{
-    gap: 10px;
-    padding: 10px;
-    border-radius: 5px;
+
+    .angel {
+        width: 65px;
+        height: 85px;
+        right: 0;
+        top: 5px;
     }
+
+    .table-wrapper {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 700px;
+    }
+
+    tbody td {
+        font-size: 11px;
+    }
+
+    .watermark {
+        font-size: 90px;
+    }
+}
+
+/* Print */
+@media print {
+    body {
+        background-color: #c7f7e9;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .container {
+        max-width: 100%;
+    }
+}
 </style>
+</head>
+
 <body>
-    <section>
-        <h1>Hello world</h1>
-        <div id="quizContainer"></div>
-        <button onclick="starButton()">Continue</button>
 
-    </section>
-    <script>
-        const quotes =["Silence is golden", " No pain, no gain","Time and tide wait for no man","Time is Gold"]
-        const quizContainer= document.querySelector('#quizContainer');
+<div class="container">
 
-        function generateQuote(){
-            quizContainer.style.opacity = 0;
+    <!-- Decorative Heart -->
+    <svg class="heart" viewBox="0 0 150 150">
+        <path d="M75 130
+        C55 115 10 85 15 50
+        C20 15 60 25 75 55
+        C95 15 140 20 140 60
+        C140 90 100 115 75 130Z"
+        fill="none"
+        stroke="#ff9999"
+        stroke-width="4"
+        stroke-linecap="round"/>
 
-            setTimeout(()=>{ const randomIndex=Math.floor(Math.random()*quotes.length)
-                quizContainer.textContent=quotes[randomIndex];
-                quizContainer.style.opacity=1;
-            },500)
-        }
-        setInterval(generateQuote,2000)
-    </script>
-    
+        <path d="M75 120 C40 95 25 75 30 50
+        M75 120 C100 90 130 75 125 50"
+        fill="none"
+        stroke="#ff9999"
+        stroke-width="3"
+        stroke-dasharray="5 4"/>
+
+        <circle cx="112" cy="15" r="5" fill="#ff9999"/>
+        <circle cx="135" cy="30" r="4" fill="#ff9999"/>
+    </svg>
+
+    <!-- Decorative Angel -->
+    <svg class="angel" viewBox="0 0 150 200"
+         fill="none" stroke="#000"
+         stroke-width="7" stroke-linecap="round"
+         stroke-linejoin="round">
+
+        <ellipse cx="120" cy="15" rx="19" ry="7"
+                 transform="rotate(35 120 15)"/>
+
+        <circle cx="85" cy="52" r="20"/>
+
+        <path d="M67 49
+        C42 25 10 35 5 52
+        C-2 65 17 69 29 65
+        C12 76 17 91 35 88
+        C25 105 43 113 55 98"/>
+
+        <path d="M96 70
+        C115 77 145 90 140 116
+        C137 130 121 135 118 115
+        C115 140 96 146 92 124"/>
+
+        <path d="M77 74
+        L40 165
+        C35 180 58 180 65 165
+        L110 86"/>
+
+        <path d="M30 160
+        C38 190 65 194 82 173"/>
+
+        <path d="M62 160
+        C65 183 86 184 96 162"/>
+    </svg>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>景文 TFL</h1>
+        <h2>115/1 學習主題</h2>
+    </div>
+
+    <!-- Watermark -->
+    <div class="watermark">TFL</div>
+
+    <!-- Schedule Table -->
+    <div class="table-wrapper">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>日期 / Date</th>
+                    <th>主題 / Topic</th>
+                    <th>內容 /<br>Content</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td class="date"><span>9/29/2026</span></td>
+                    <td class="topic" style="text-align:center;">
+                        課程介紹 / Course Introduction
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="date"><span>10/6/2026</span></td>
+                    <td class="topic">
+                        1. 好好愛自己 / Love Yourself First
+                    </td>
+                    <td>
+                        談戀愛從認識自己開始，自我探索 /
+                        Dating begins with knowing yourself: self-exploration.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="date"><span>10/13/2026</span></td>
+                    <td class="topic">
+                        2. 我的愛情風格 / My Love Style
+                    </td>
+                    <td>
+                        檢測自己的戀愛依附關係 /
+                        Discover your romantic attachment style.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="date"><span>10/20/2026</span></td>
+                    <td class="topic">
+                        3. 愛的語言 / The Five Love Languages
+                    </td>
+                    <td>
+                        認識愛的五種語言並且知道如何運用 /
+                        Learn about the five love languages and how to apply them in relationships.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="date"><span>10/27/2026</span></td>
+                    <td class="topic">
+                        4. 何世間情是何物 / What Is True Love?
+                    </td>
+                    <td>
+                        分辨何謂真愛，避免被騙 /
+                        Learn how to recognize true love and avoid being deceived.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="date"><span>11/3/2026</span></td>
+                    <td class="topic">
+                        5. 男女大不同 / Men and Women Are Different
+                    </td>
+                    <td>
+                        知己知彼才能百戰百勝 /
+                        Understanding each other is the key to building successful relationships.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="date"><span>11/10/2026</span></td>
+                    <td class="topic">
+                        6. 天生絕配 / Finding Your Perfect Match
+                    </td>
+                    <td>
+                        先訂好方向再來決定對象，理想條件大公開 /
+                        Define what you are looking for before choosing a partner. Discover your ideal partner criteria.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="date"><span>11/17/2026</span></td>
+                    <td class="topic">
+                        7. 真愛之旅 / The Journey of True Love
+                    </td>
+                    <td>
+                        溫馨有愛的旅程 /
+                        A warm and heartwarming journey filled with love.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="date"><span>11/24/2026</span></td>
+                    <td class="topic">
+                        8. 相愛容易相處難 / Falling in Love Is Easy, Staying Together Is Hard?
+                    </td>
+                    <td>
+                        認識不同衝突模式及提升人際關係技巧 /
+                        Understand different conflict patterns and improve interpersonal relationship skills.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="date"><span>12/1/2026</span></td>
+                    <td class="topic">
+                        9. 差異與衝突 / Differences and Conflicts
+                    </td>
+                    <td>
+                        為什麼人會吵架？DISC人格分析 /
+                        Why do people argue? Explore personality types through DISC analysis.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="date"><span>12/8/2026</span></td>
+                    <td class="topic">
+                        10. 我為什麼是我？/ Why Am I Who I Am?
+                    </td>
+                    <td>
+                        認識原生家庭對人的影響 /
+                        Understand how your family background and childhood experiences shape who you are.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="date"><span>12/15/2026</span></td>
+                    <td class="topic">
+                        11. 其實我懂你的心 / I Understand How You Feel
+                    </td>
+                    <td>
+                        學習良好溝通技巧 /
+                        Learn effective communication skills.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="date"><span>12/22/2026</span></td>
+                    <td class="topic">
+                        聖誕餐會 / Christmas Party
+                    </td>
+                    <td>
+                        聖誕歡樂餐會 /
+                        A joyful Christmas celebration.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="date"><span>12/29/2026</span></td>
+                    <td class="topic">
+                        12. 18禁不禁？/ Should the age limit be 18?
+                    </td>
+                    <td>
+                        討論身體界線及戀愛的關係 /
+                        Discuss personal boundaries and their relationship to dating.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="date"><span>1/5/2027</span></td>
+                    <td class="topic">
+                        13. 分手快樂？/ Happy Breakup?
+                    </td>
+                    <td>
+                        如何健康安全的結束關係 /
+                        Learn how to end a relationship in a healthy and safe way.
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
 </body>
 </html>
