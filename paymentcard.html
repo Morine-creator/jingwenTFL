@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MORI MOVES | Class Check-in</title>
+
+<!-- QR Code Generator -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<!-- QR Code Scanner -->
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<style>
+
+/* =========================
+   GENERAL
+========================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f5f7;
+    color: #222;
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    background: #ffffff;
+    padding: 20px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #c98673;
+}
+
+.subtitle {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: #555;
+}
+
+
+/* =========================
+   PAGE LAYOUT
+========================= */
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section-title h1 {
+    font-size: 32px;
+}
+
+.section-title p {
+    color: #777;
+    margin-top: 8px;
+}
+
+
+/* =========================
+   CREATE FORM
+========================= */
+
+.form-box {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 600px;
+    margin: auto;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.form-box h2 {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+button {
+    border: none;
+    padding: 14px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.create-btn {
+    width: 100%;
+    margin-top: 25px;
+    background: #222;
+    color: white;
+}
+
+.create-btn:hover {
+    background: #444;
+}
+
+
+/* =========================
+   CHECK-IN CARD
+========================= */
+
+.card-section {
+    display: none;
+    margin-top: 50px;
+}
+
+.checkin-card {
+    max-width: 900px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.12);
+}
+
+
+/* LEFT SIDE */
+
+.card-left {
+    background: #f5f1ef;
+    padding: 45px 30px;
+    text-align: center;
+}
+
+.card-logo {
+    font-size: 65px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.card-logo span {
+    color: #c98673;
+}
+
+.card-left h2 {
+    color: #c98673;
+    margin-bottom: 25px;
+}
+
+#qrcode {
+    background: white;
+    padding: 15px;
+    display: inline-block;
+}
+
+.qr-note {
+    margin-top: 20px;
+    font-size: 13px;
+    color: #777;
+}
+
+
+/* RIGHT SIDE */
+
+.card-right {
+    padding: 70px 50px;
+    background:
+        radial-gradient(circle at 20% 30%, #bdf0db 0%, transparent 35%),
+        linear-gradient(120deg, #d7f5e8, #7ba1e0);
+}
+
+.card-title {
+    font-size: 50px;
+    font-weight: bold;
+    color: #2d2929;
+    letter-spacing: 2px;
+}
+
+.card-subtitle {
+    font-size: 25px;
+    letter-spacing: 3px;
+    margin-top: 15px;
+    color: #273454;
+}
+
+.student-info {
+    margin-top: 70px;
+}
+
+.info-row {
+    margin: 22px 0;
+    font-size: 22px;
+    color: white;
+}
+
+.info-label {
+    display: inline-block;
+    min-width: 130px;
+    font-weight: bold;
+}
+
+.status {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    background: #28a745;
+    color: white;
+    font-weight: bold;
+}
+
+.used {
+    background: #dc3545;
+}
+
+
+/* =========================
+   SCANNER
+========================= */
+
+.scanner-section {
+    margin-top: 60px;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.scanner-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#reader {
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+}
+
+.scan-result {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.success {
+    color: #168f36;
+}
+
+.error {
+    color: #dc3545;
+}
+
+
+/* =========================
+   HISTORY
+========================= */
+
+.history {
+    margin-top: 50px;
+}
+
+.history h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.history-box {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.history-item {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    .checkin-card {
+        grid-template-columns: 1fr;
+    }
+
+    .card-right {
+        padding: 40px 25px;
+    }
+
+    .card-title {
+        font-size: 38px;
+    }
+
+    .info-row {
+        font-size: 18px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+HEADER
+========================= -->
+
+<header>
+
+    <div>
+        <div class="logo">
+            MORI <span>MOVES</span>
+        </div>
+
+        <div class="subtitle">
+            FITNESS DANCE CLASS
+        </div>
+    </div>
+
+</header>
+
+
+
+<div class="container">
+
+
+<!-- =========================
+CREATE STUDENT QR
+========================= -->
+
+<div class="section-title">
+
+    <h1>Create Class Check-in Card</h1>
+
+    <p>
+        One QR code = One Class
+    </p>
+
+</div>
+
+
+<div class="form-box">
+
+    <h2>Student Information</h2>
+
+
+    <label>Student Name</label>
+
+    <input
+        type="text"
+        id="studentName"
+        placeholder="Enter student name"
+    >
+
+
+    <label>Class Date</label>
+
+    <input
+        type="date"
+        id="classDate"
+    >
+
+
+    <button
+        class="create-btn"
+        onclick="createCheckinCard()"
+    >
+        CREATE QR CHECK-IN CARD
+    </button>
+
+
+</div>
+
+
+
+<!-- =========================
+CHECK-IN CARD
+========================= -->
+
+<div
+    class="card-section"
+    id="cardSection"
+>
+
+
+<div class="checkin-card">
+
+
+<!-- LEFT -->
+
+<div class="card-left">
+
+    <div class="card-logo">
+        M<span>M</span>
+    </div>
+
+
+    <h2>Class Card</h2>
+
+
+    <div id="qrcode"></div>
+
+
+    <div class="qr-note">
+
+        Valid for one class only
+
+    </div>
+
+
+</div>
+
+
+
+<!-- RIGHT -->
+
+<div class="card-right">
+
+
+    <div class="card-title">
+
+        MORI MOVES
+
+    </div>
+
+
+    <div class="card-subtitle">
+
+        FITNESS DANCE CLASS
+
+    </div>
+
+
+
+    <div class="student-info">
+
+
+        <div class="info-row">
+
+            👤
+            <span class="info-label">
+                Student:
+            </span>
+
+            <span id="cardStudentName"></span>
+
+        </div>
+
+
+
+        <div class="info-row">
+
+            📅
+            <span class="info-label">
+                Class Date:
+            </span>
+
+            <span id="cardClassDate"></span>
+
+        </div>
+
+
+
+        <div class="info-row">
+
+            🎫
+            <span class="info-label">
+                Check-in:
+            </span>
+
+            One Class
+
+        </div>
+
+
+
+        <div
+            class="status"
+            id="cardStatus"
+        >
+
+            ✓ VALID
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+QR SCANNER
+========================= -->
+
+<div class="scanner-section">
+
+    <h2>Teacher QR Scanner</h2>
+
+    <div id="reader"></div>
+
+
+    <div
+        class="scan-result"
+        id="scanResult"
+    >
+        Ready to scan
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================
+CHECK-IN HISTORY
+========================= -->
+
+<div class="history">
+
+    <h2>Check-in History</h2>
+
+
+    <div
+        class="history-box"
+        id="historyBox"
+    >
+
+        No check-ins yet.
+
+    </div>
+
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* ======================================
+   GENERATE RANDOM QR TOKEN
+====================================== */
+
+function generateToken() {
+
+    const characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    let token = "MORI-";
+
+    for (let i = 0; i < 12; i++) {
+
+        token += characters.charAt(
+            Math.floor(
+                Math.random()
+                *
+                characters.length
+            )
+        );
+
+    }
+
+    return token;
+
+}
+
+
+
+/* ======================================
+   CREATE CHECK-IN CARD
+====================================== */
+
+function createCheckinCard() {
+
+
+    const studentName =
+        document
+        .getElementById("studentName")
+        .value
+        .trim();
+
+
+    const classDate =
+        document
+        .getElementById("classDate")
+        .value;
+
+
+
+    if (
+        studentName === ""
+        ||
+        classDate === ""
+    ) {
+
+        alert(
+            "Please enter student name and class date."
+        );
+
+        return;
+
+    }
+
+
+
+    const token =
+        generateToken();
+
+
+
+    const ticket = {
+
+        token: token,
+
+        studentName: studentName,
+
+        classDate: classDate,
+
+        status: "VALID",
+
+        createdAt:
+            new Date()
+            .toISOString(),
+
+        checkedInAt: null
+
+    };
+
+
+
+    /* SAVE TO LOCAL DATABASE */
+
+    let tickets =
+        JSON.parse(
+            localStorage.getItem(
+                "moriMovesTickets"
+            )
+        )
+        ||
+        [];
+
+
+
+    tickets.push(ticket);
+
+
+
+    localStorage.setItem(
+
+        "moriMovesTickets",
+
+        JSON.stringify(tickets)
+
+    );
+
+
+
+    /* DISPLAY CARD */
+
+    document
+    .getElementById("cardStudentName")
+    .innerText =
+        studentName;
+
+
+
+    document
+    .getElementById("cardClassDate")
+    .innerText =
+        formatDate(classDate);
+
+
+
+    document
+    .getElementById("cardStatus")
+    .innerText =
+        "✓ VALID";
+
+
+
+    document
+    .getElementById("cardStatus")
+    .classList
+    .remove("used");
+
+
+
+    /* CREATE QR */
+
+    document
+    .getElementById("qrcode")
+    .innerHTML =
+        "";
+
+
+
+    new QRCode(
+
+        document
+        .getElementById("qrcode"),
+
+        {
+
+            text: token,
+
+            width: 220,
+
+            height: 220,
+
+            colorDark:
+                "#000000",
+
+            colorLight:
+                "#ffffff",
+
+            correctLevel:
+                QRCode.CorrectLevel.H
+
+        }
+
+    );
+
+
+
+    document
+    .getElementById("cardSection")
+    .style
+    .display =
+        "block";
+
+
+    renderHistory();
+
+
+}
+
+
+
+/* ======================================
+   FORMAT DATE
+====================================== */
+
+function formatDate(dateString) {
+
+
+    const date =
+        new Date(
+            dateString
+            +
+            "T00:00:00"
+        );
+
+
+    return date
+        .toLocaleDateString(
+
+            "en-US",
+
+            {
+
+                year:
+                    "numeric",
+
+                month:
+                    "long",
+
+                day:
+                    "numeric"
+
+            }
+
+        );
+
+}
+
+
+
+/* ======================================
+   QR SCAN SUCCESS
+====================================== */
+
+let scanning =
+    false;
+
+
+
+function onScanSuccess(
+    decodedText
+) {
+
+
+    if (
+        scanning
+    ) {
+
+        return;
+
+    }
+
+
+
+    scanning =
+        true;
+
+
+
+    checkTicket(
+        decodedText
+    );
+
+
+
+    setTimeout(
+
+        function() {
+
+            scanning =
+                false;
+
+        },
+
+        3000
+
+    );
+
+}
+
+
+
+/* ======================================
+   CHECK TICKET
+====================================== */
+
+function checkTicket(
+    token
+) {
+
+
+    let tickets =
+        JSON.parse(
+
+            localStorage
+            .getItem(
+                "moriMovesTickets"
+            )
+
+        )
+        ||
+        [];
+
+
+
+    const ticketIndex =
+        tickets.findIndex(
+
+            ticket =>
+            ticket.token === token
+
+        );
+
+
+
+    const result =
+        document
+        .getElementById(
+            "scanResult"
+        );
+
+
+
+    /* QR DOES NOT EXIST */
+
+    if (
+        ticketIndex === -1
+    ) {
+
+
+        result.innerHTML =
+            "❌ INVALID QR CODE";
+
+
+        result.className =
+            "scan-result error";
+
+
+        return;
+
+    }
+
+
+
+    const ticket =
+        tickets[
+            ticketIndex
+        ];
+
+
+
+    /* ALREADY USED */
+
+    if (
+        ticket.status ===
+        "USED"
+    ) {
+
+
+        result.innerHTML =
+
+            "❌ ALREADY CHECKED IN<br><br>"
+
+            +
+
+            "Student: "
+
+            +
+
+            ticket.studentName
+
+            +
+
+            "<br>"
+
+            +
+
+            "Class: "
+
+            +
+
+            formatDate(
+                ticket.classDate
+            )
+
+            +
+
+            "<br>"
+
+            +
+
+            "Checked in: "
+
+            +
+
+            ticket.checkedInAt;
+
+
+
+        result.className =
+            "scan-result error";
+
+
+        return;
+
+    }
+
+
+
+    /* CHECK-IN SUCCESS */
+
+    tickets[
+        ticketIndex
+    ]
+    .status =
+        "USED";
+
+
+
+    tickets[
+        ticketIndex
+    ]
+    .checkedInAt =
+        new Date()
+        .toLocaleString();
+
+
+
+    localStorage.setItem(
+
+        "moriMovesTickets",
+
+        JSON.stringify(
+            tickets
+        )
+
+    );
+
+
+
+    result.innerHTML =
+
+        "✅ CHECK-IN SUCCESSFUL!<br><br>"
+
+        +
+
+        "Student: "
+
+        +
+
+        ticket.studentName
+
+        +
+
+        "<br>"
+
+        +
+
+        "Class: "
+
+        +
+
+        formatDate(
+            ticket.classDate
+        )
+
+        +
+
+        "<br>"
+
+        +
+
+        "Status: USED";
+
+
+
+    result.className =
+        "scan-result success";
+
+
+
+    renderHistory();
+
+
+}
+
+
+
+/* ======================================
+   CHECK-IN HISTORY
+====================================== */
+
+function renderHistory() {
+
+
+    const tickets =
+        JSON.parse(
+
+            localStorage
+            .getItem(
+                "moriMovesTickets"
+            )
+
+        )
+        ||
+        [];
+
+
+
+    const historyBox =
+        document
+        .getElementById(
+            "historyBox"
+        );
+
+
+
+    const usedTickets =
+        tickets.filter(
+
+            ticket =>
+            ticket.status ===
+            "USED"
+
+        );
+
+
+
+    if (
+        usedTickets.length === 0
+    ) {
+
+
+        historyBox.innerHTML =
+            "No check-ins yet.";
+
+
+        return;
+
+    }
+
+
+
+    historyBox.innerHTML =
+        "";
+
+
+
+    usedTickets
+    .reverse()
+    .forEach(
+
+        ticket => {
+
+
+            const item =
+                document
+                .createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "history-item";
+
+
+            item.innerHTML =
+
+                "<strong>"
+
+                +
+
+                ticket.studentName
+
+                +
+
+                "</strong>"
+
+                +
+
+                "<br>"
+
+                +
+
+                "Class Date: "
+
+                +
+
+                formatDate(
+                    ticket.classDate
+                )
+
+                +
+
+                "<br>"
+
+                +
+
+                "Checked in: "
+
+                +
+
+                ticket.checkedInAt;
+
+
+
+            historyBox
+            .appendChild(
+                item
+            );
+
+
+        }
+
+    );
+
+
+}
+
+
+
+/* ======================================
+   START QR SCANNER
+====================================== */
+
+const html5QrCode =
+    new Html5Qrcode(
+        "reader"
+    );
+
+
+
+const qrCodeSuccessCallback =
+    (decodedText) => {
+
+
+        onScanSuccess(
+            decodedText
+        );
+
+    };
+
+
+
+const config = {
+
+    fps:
+        10,
+
+    qrbox:
+        {
+            width: 250,
+            height: 250
+        }
+
+};
+
+
+
+Html5Qrcode
+.getCameras()
+
+.then(
+
+    cameras => {
+
+
+        if (
+            cameras &&
+            cameras.length
+        ) {
+
+
+            let cameraId =
+                cameras[0].id;
+
+
+
+            /*
+            Try to find
+            back camera
+            */
+
+            cameras.forEach(
+
+                camera => {
+
+
+                    if (
+
+                        camera.label
+                        .toLowerCase()
+                        .includes(
+                            "back"
+                        )
+
+                    ) {
+
+
+                        cameraId =
+                            camera.id;
+
+                    }
+
+
+                }
+
+            );
+
+
+
+            html5QrCode.start(
+
+                cameraId,
+
+                config,
+
+                qrCodeSuccessCallback,
+
+                () => {}
+
+            );
+
+
+        }
+
+
+    }
+
+)
+
+.catch(
+
+    error => {
+
+
+        console.log(
+            "Camera error:",
+            error
+        );
+
+
+    }
+
+);
+
+
+
+/* ======================================
+   LOAD HISTORY
+====================================== */
+
+renderHistory();
+
+
+</script>
+
+
+</body>
+</html>
